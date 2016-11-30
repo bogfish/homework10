@@ -50,12 +50,12 @@ ostream& operator<<(ostream & out, const town & T)
   return out;
 }
 
-bool town:: isWall(const char check)const
+bool town:: isWall(const short row, const short col)const
 {
   return check==WALL ? true : false;
 }
 
-bool town:: isExit(const char check)const
+bool town:: isExit(const short row, const short col)const
 {
   return check==EXIT ? true : false;
 }

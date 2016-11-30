@@ -35,12 +35,12 @@ class town
     //Desc: Checks to see if the passed character is a wall
     //Pre: None
     //Post: Returns whether the character is a wall
-    bool isWall(const char check)const;
+    bool isWall(const short row, const short col)const;
 
     //Desc: Checks to see if the passed character is an exit
     //Pre: None
     //Post: Returns whether or note the charaacter is an exit
-    bool isExit(const char check)const;
+    bool isExit(const short row, const short col)const;
 
     //Desc: The function returns the character value at the passed position
     //Pre: None

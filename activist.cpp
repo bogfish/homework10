@@ -16,102 +16,51 @@ void activist:: placeMeInMiddle(town & t)
 
 void activist:: randMove(town & t)
 {
-  short ran;//Will be used to generate number 1 - 8 to represent movement
-                         //1 2 3
-                         //4 A 5
-                         //6 7 8
+  short ran;//Will be used to generate number 1 - 4 to represent movement
+                         //  1
+                         //4 A 2
+                         //  3
   short r = row_loc;//Because I'm too lazy to type row_loc and col_loc
   short c = col_loc;
   bool done = false;//Checks to see if the activist was able to move
-  do//This entire loop attempts to move the activist
+  char currentSquare; //To be used to set the square in the town map. NOT USED
+  ran = myRand(4,1);
+  if(ran == 1)
   {
-    ran = myRand(8,1);
-    if(ran == 1)
+    if(!t.isWall(r-1,c) && !t.isExit(r-1,c))
     {
-      if(t.getSquare(r-1,c-1) == ' ')
-      {
-        t.setSquare(r, c, ' ');
-        row_loc--;
-        col_loc--;
-        t.setSquare(row_loc, col_loc, arr_Char);
-        done = true;
-      }
+      t.setSquare(r, c, ' ');
+      row_loc--;
+      t.setSquare(row_loc, col_loc, arr_Char);
     }
-    else if(ran == 2)
+  }
+  else if(ran == 2)
+  {
+    if(!t.isWall(r,c-1) && !t.isExit(r,c-1))
     {
-      if(t.getSquare(r-1,c) == ' ')
-      {
-        t.setSquare(r, c, ' ');
-        row_loc--;
-        t.setSquare(row_loc, c, arr_Char);
-        done = true;
-      }
+      t.setSquare(r, c, ' ');
+      col_loc--;
+      t.setSquare(r, col_loc, arr_Char);
     }
-    else if(ran == 3)
+  }
+  else if(ran == 3)
+  {
+    if(!t.isWall(r+1,c) && !t.isExit(r+1,c))
     {
-      if(t.getSquare(r-1,c+1) == ' ')
-      {
-        t.setSquare(r, c, ' ');
-        row_loc--;
-        col_loc++;
-        t.setSquare(row_loc, col_loc, arr_Char);
-        done = true;
-      }
+      t.setSquare(r, c, ' ');
+      row_loc++;
+      t.setSquare(row_loc, col_loc, arr_Char);
     }
-    else if(ran == 4)
+  }
+  else if(ran == 4)
+  {
+    if(!t.isWall(r,c-1) && !t.isExit(r,c-1))
     {
-      if(t.getSquare(r,c-1) == ' ')
-      {
-        t.setSquare(r, c, ' ');
-        col_loc--;
-        t.setSquare(row_loc, col_loc, arr_Char);
-        done = true;
-      }
+      t.setSquare(r, c, ' ');
+      col_loc--;
+      t.setSquare(row_loc, col_loc, arr_Char);
     }
-    else if(ran == 5)
-    {
-      if(t.getSquare(r,c+1) == ' ')
-      {
-        t.setSquare(r, c, ' ');
-        col_loc++;
-        t.setSquare(row_loc, col_loc, arr_Char);
-        done = true;
-      }
-    }
-    else if(ran == 6)
-    {
-      if(t.getSquare(r+1,c-1) == ' ')
-      {
-        t.setSquare(r, c, ' ');
-        col_loc--;
-        row_loc++;
-        t.setSquare(row_loc, col_loc, arr_Char);
-        done = true;
-      }
-    }
-    else if(ran == 7)
-    {
-      if(t.getSquare(r+1,c) == ' ')
-      {
-        t.setSquare(r, c, ' ');
-        row_loc++;
-        t.setSquare(row_loc, col_loc, arr_Char);
-        done = true;
-      }
-    }
-    else if(ran == 8)
-    {
-      if(t.getSquare(r+1,c+1) == ' ')
-      {
-        t.setSquare(r, c, ' ');
-        col_loc++;
-        row_loc++;
-        t.setSquare(row_loc, col_loc, arr_Char);
-        done = true;
-      }
-    }
-  }while(!done);
-
+  }
   return;
 }
 
@@ -129,4 +78,4 @@ short myRand(const short max, const short min)
   short retVal;
   retVal = rand() % (max - min +1) + min;
   return retVal;
-} 
+}
