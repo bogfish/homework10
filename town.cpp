@@ -8,6 +8,9 @@
 
 void town:: build()
 {
+  ifstream fin("config.dat");
+  numRoots = 2;
+  numCops = 2;
   short halfSize = size / 2;//Used to place exits
   for(int r = 0; r < size; r++)
   {
@@ -83,4 +86,11 @@ void town:: setSquare(const short row, const short col, const char val)
 {
   townMap[row][col] = val;
   return;
+}
+
+short myRand(const short max, const short min)
+{
+  short retVal;
+  retVal = rand() % (max - min +1) + min;
+  return retVal;
 }

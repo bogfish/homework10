@@ -3,8 +3,10 @@
 //Date: 11/18/16                   File: root.h
 //Description: Header file for the root class
 
-#include "polluter.h"
-#include <iostream>
+#ifndef ROOT_H
+#define ROOT_H
+
+#include "activist.h"
 
 using namespace std;
 
@@ -24,4 +26,4 @@ class Root
     Root();
 };
 
-short myRand(const short max, const short min);
+#endif

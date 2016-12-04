@@ -21,10 +21,3 @@ Root::Root()
     desc = SQUARE;
   }
 }
-
-short myRand(const short max, const short min)
-{
-  short retVal;
-  retVal = rand() % (max - min +1) + min;
-  return retVal;
-}

@@ -3,7 +3,10 @@
 //Date: 11/18/16                   File: polluter.h
 //Description: Header file for the polluter class
 
-#include "activist.h"
+#ifndef POLLUTER_H
+#define POLLUTER_H
+
+#include "town.h"
 
 
 class polluter
@@ -17,7 +20,7 @@ class polluter
     char last_Char;
   public:
     polluter(const string n):
-      name(n), row_loc(-1), col_loc(-1), arr_Char('P'), isCaught(false),
+      name(n), row_loc(-1), col_loc(-1), arr_Char('P'), is_Caught(false),
       last_Char(SPACE) {}
 
     //Desc:Moves the polluter to an empty adjacent tile in a random direction
@@ -40,3 +43,5 @@ class polluter
     //Post: Returns the row position of the polluter
     short getCol()const;
 };
+
+#endif

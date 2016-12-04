@@ -119,11 +119,3 @@ ostream& operator<<(ostream & out, const activist & A)
       <<"Column: "<<A.col_loc<<endl;
   return out;
 }
-
-
-short myRand(const short max, const short min)
-{
-  short retVal;
-  retVal = rand() % (max - min +1) + min;
-  return retVal;
-}

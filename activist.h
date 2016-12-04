@@ -3,8 +3,10 @@
 //Date: 11/18/16                   File: activist.h
 //Description: Header file for the activist class
 
-#include "town.h"
-#include <cstdlib>
+#ifndef ACTIVIST_H
+#define ACTIVIST_H
+
+#include "polluter.h"
 
 
 const float MAX_TOX = 3;//Maximum and minimum toxicity
@@ -29,7 +31,7 @@ class activist
   public:
     activist(const string n, const char space = 'A'):
       toxicity(.05), dignity(100), name(n), row_loc(-1), col_loc(-1),
-      arr_Char(space), state(STATES[0], last_Char(SPACE)) {}
+      arr_Char(space), state(STATES[0]), last_Char(SPACE) {}
 
     //Desc: This places the activist in the center of town
     //Pre: None
@@ -55,4 +57,6 @@ class activist
 //Desc: Generates a random number between max and min
 //Pre: none
 //Post: Returns a random number between max and min
-short myRand(const short max, const short min);
+
+
+#endif

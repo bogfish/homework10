@@ -25,7 +25,7 @@ void polluter:: random_move(town & t)
         if(t.isCop(r-1,c))
           is_Caught = true;
         t.setSquare(r, c, last_Char);
-        last_Char = getSquare(r-1,c);
+        last_Char = t.getSquare(r-1,c);
         row_loc--;
         t.setSquare(row_loc, col_loc, arr_Char);
       }
@@ -38,7 +38,7 @@ void polluter:: random_move(town & t)
         if(t.isCop(r,c+1))
           is_Caught = true;
         t.setSquare(r, c, last_Char);
-        last_Char = getSquare(r,c+1);
+        last_Char = t.getSquare(r,c+1);
         col_loc--;
         t.setSquare(r, col_loc, arr_Char);
       }
@@ -50,7 +50,7 @@ void polluter:: random_move(town & t)
         if(t.isCop(r+1,c))
           is_Caught = true;
         t.setSquare(r, c, last_Char);
-        last_Char = getSquare(r+1,c);
+        last_Char = t.getSquare(r+1,c);
         row_loc++;
         t.setSquare(row_loc, col_loc, arr_Char);
       }
@@ -62,7 +62,7 @@ void polluter:: random_move(town & t)
         if(t.isCop(r,c-1))
           is_Caught = true;
         t.setSquare(r, c, last_Char);
-        last_Char = getSquare(r,c-1);
+        last_Char = t.getSquare(r,c-1);
         col_loc--;
         t.setSquare(row_loc, col_loc, arr_Char);
       }
@@ -92,12 +92,12 @@ void polluter:: place_me(town & t)
   return;
 }
 
-short polluter:: getRow()
+short polluter:: getRow()const
 {
   return row_loc;
 }
 
-short polluter:: getCol()
+short polluter:: getCol()const
 {
   return col_loc;
 }

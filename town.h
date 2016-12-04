@@ -3,7 +3,14 @@
 //Date: 11/18/16                   File: town.h
 //Description: Header file for the town class
 
+#ifndef TOWN_H
+#define TOWN_H
+
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <cstring>
+
 using namespace std;
 
 const short MAX_SIZE = 25;
@@ -18,14 +25,14 @@ class town
   private:
     short size;
     char townMap[MAX_SIZE][MAX_SIZE];
-    void build(ifstream);
+    void build();
     void clear();
-    void setSize(const short s)
+    void setSize(const short s);
     short numRoots;//Number of roots in the town
     short numCops;//Number of cops in the town
   public:
-    town(const short townSize = MAX_SIZE):
-      {setSize(townSize); clear(); build();}
+    town(const short townSize = MAX_SIZE)
+      : numRoots(-1), numCops(-1) {setSize(townSize); clear(); build();}
     //Desc: This function returns the size of the town
     //Pre: none
     //Post: The size has been returned
@@ -63,3 +70,7 @@ class town
     //Post: The tile has been changed
     void setSquare(const short row, const short col, const char val);
 };
+
+short myRand(const short max, const short min);
+
+#endif
