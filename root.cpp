@@ -12,12 +12,13 @@ Root::Root()
 
   if (isPositive)
   {
-    randNum = myRand(POS_MAX, POS_MIN);
-    effect = TRUFFLE;
-  } else
+    effect =  myRand(POS_MAX, POS_MIN);
+    desc = TRUFFLE;
+  }
+  else
   {
-    randNum = myRand(NEG_MAX, NEG_MIN);
-    effect = SQUARE;
+    effect = myRand(NEG_MAX, NEG_MIN);
+    desc = SQUARE;
   }
 }
 

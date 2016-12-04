@@ -54,6 +54,25 @@ void activist:: randMove(town & t)
   }
   else if(ran == 4)
   {
+    if(t.isWall(r,c-1))
+    {
+      //DO WALL STUFF
+    }
+    else if(t.isExit(r,c-1))
+    {
+      //DO EXIT STUFF
+    }
+    else
+    {
+      if(t.isCop(r,c-1))
+      {
+        //DO COP STUFF
+      }
+      t.setSquare(r, c, last_Char);
+      col_loc--;
+      last_Char = t.getSquare(row_loc, col_loc);
+      t.setSquare(row_loc, col_loc, arr_Char);
+    }
     if(!t.isWall(r,c-1) && !t.isExit(r,c-1))
     {
       t.setSquare(r, c, last_Char);
