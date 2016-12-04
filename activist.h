@@ -23,10 +23,13 @@ class activist
     short col_loc;
     char arr_Char;
     string state;
+    char last_Char;//The character that was in the array before the activist
+    short wall_Loss;//Dignity lost for running into a wall
+    short cop_Loss;//Dignity lost for running into a cop
   public:
     activist(const string n, const char space = 'A'):
       toxicity(.05), dignity(100), name(n), row_loc(-1), col_loc(-1),
-      arr_Char(space), state(STATES[0]) {}
+      arr_Char(space), state(STATES[0], last_Char(SPACE)) {}
 
     //Desc: This places the activist in the center of town
     //Pre: None
@@ -37,6 +40,11 @@ class activist
     //Pre: None
     //Post: The activist has been moved
     void randMove(town & t);
+
+    //Desc: This moves the activist towards the polluter
+    //Pre: Toxicity must be lower than the "cool threshold"
+    //Post: The activist has been moved towards the polluter
+    void searchMove(town & t, const polluter & p);
 
     //Desc: This overloads << to display characteristics of the activist
     //Pre: None

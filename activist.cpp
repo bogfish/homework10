@@ -29,7 +29,7 @@ void activist:: randMove(town & t)
   {
     if(!t.isWall(r-1,c) && !t.isExit(r-1,c))
     {
-      t.setSquare(r, c, ' ');
+      t.setSquare(r, c, last_Char);
       row_loc--;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
@@ -38,7 +38,7 @@ void activist:: randMove(town & t)
   {
     if(!t.isWall(r,c-1) && !t.isExit(r,c-1))
     {
-      t.setSquare(r, c, ' ');
+      t.setSquare(r, c, last_Char);
       col_loc--;
       t.setSquare(r, col_loc, arr_Char);
     }
@@ -47,7 +47,7 @@ void activist:: randMove(town & t)
   {
     if(!t.isWall(r+1,c) && !t.isExit(r+1,c))
     {
-      t.setSquare(r, c, ' ');
+      t.setSquare(r, c, last_Char);
       row_loc++;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
@@ -56,10 +56,39 @@ void activist:: randMove(town & t)
   {
     if(!t.isWall(r,c-1) && !t.isExit(r,c-1))
     {
-      t.setSquare(r, c, ' ');
+      t.setSquare(r, c, last_Char);
       col_loc--;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
+  }
+  return;
+}
+
+void activist:: searchMove(town & t, const polluter & p)
+{
+  if(p.getRow() > row_loc)
+  {
+    t.setSquare(row_loc, col_loc, last_Char);
+    row_loc++;
+    t.setSquare(row_loc, col_loc, arr_Char);
+  }
+  else if(p.getRow() < row_loc)
+  {
+    t.setSquare(row_loc, col_loc, last_Char);
+    row_loc--;
+    t.setSquare(row_loc, col_loc, arr_Char);
+  }
+  else if(p.getCol() > col_loc)
+  {
+    t.setSquare(row_loc, col_loc, last_Char);
+    col_loc++;
+    t.setSquare(row_loc, col_loc, arr_Char);
+  }
+  else if(p.getCol() < col_loc)
+  {
+    t.setSquare(row_loc, col_loc, last_Char);
+    col_loc--;
+    t.setSquare(row_loc, col_loc, arr_Char);
   }
   return;
 }

@@ -9,17 +9,23 @@ using namespace std;
 const short MAX_SIZE = 25;
 const char WALL = 'W';
 const char EXIT = 'E';
+const char SPACE = ' ';
+const char COP = 'C';
+const char DEF_POLLUTER = 'P';//The default polluter character
 
 class town
 {
   private:
     short size;
     char townMap[MAX_SIZE][MAX_SIZE];
-    void build();
+    void build(ifstream);
     void clear();
+    void setSize(const short s)
+    short numRoots;//Number of roots in the town
+    short numCops;//Number of cops in the town
   public:
     town(const short townSize = MAX_SIZE):
-     size(townSize) { clear(); build();}
+      {setSize(townSize); clear(); build();}
     //Desc: This function returns the size of the town
     //Pre: none
     //Post: The size has been returned
@@ -41,6 +47,11 @@ class town
     //Pre: None
     //Post: Returns whether or note the charaacter is an exit
     bool isExit(const short row, const short col)const;
+
+    //Desc: This checks to see if the passed character is a "Cop"
+    //Pre: None
+    //Post: Returns whether or not the passed character is a "Cop"
+    bool isCop(const short row, const short col)const;
 
     //Desc: The function returns the character value at the passed position
     //Pre: None

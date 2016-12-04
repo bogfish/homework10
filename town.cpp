@@ -33,6 +33,15 @@ void town:: clear()
   return;
 }
 
+void town:: setSize(const short s)
+{
+  if(s < MAX_SIZE || s < 1)
+    size = s;
+  else
+    size = MAX_SIZE;
+  return;
+}
+
 short town:: getSize()const
 {
   return size;
@@ -52,12 +61,17 @@ ostream& operator<<(ostream & out, const town & T)
 
 bool town:: isWall(const short row, const short col)const
 {
-  return check==WALL ? true : false;
+  return townMap[row][col]==WALL ? true : false;
 }
 
 bool town:: isExit(const short row, const short col)const
 {
-  return check==EXIT ? true : false;
+  return townMap[row][col]==EXIT ? true : false;
+}
+
+bool town:: isCop(const short row, const short col)const
+{
+  return townMap[row][col]==COP ? true : false;
 }
 
 char town:: getSquare(const short row, const short col)const
