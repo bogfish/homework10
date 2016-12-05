@@ -1,4 +1,4 @@
-//Programmer: ANDREW BRAY          ID: 12518487
+//Programmer: ANDREW BRAY, JOSHUA WARNER          ID: 12518487, 12522483
 //Class: CS1570                    Section: A
 //Date: 11/18/16                   File: activist.h
 //Description: Header file for the activist class
@@ -8,12 +8,16 @@
 
 #include "polluter.h"
 
-
+const char DEF_ACTIVIST = 'A';//Default character for the activist
 const float MAX_TOX = 3;//Maximum and minimum toxicity
 const float MIN_TOX = 0;
 const short MAX_DIG = 100;//Maximum and minimum toxicity
 const short MIN_DIG = 0;
-const string STATES[] = {"normal", "gone", "cool"};
+const float START_TOX = .05;
+const short START_DIG = 100;
+const string STATES[] = {"normal", "cool", "gone"};
+const float FIRST_TOX_UP = .08;//These two will change the state according to
+const float SECOND_TOX_UP = .25;//the STATES array
 
 class activist
 {
@@ -28,10 +32,15 @@ class activist
     char last_Char;//The character that was in the array before the activist
     short wall_Loss;//Dignity lost for running into a wall
     short cop_Loss;//Dignity lost for running into a cop
+    bool lose;//Starts false, made true by touching an exit, getting too much
+              //toxicity, or by having too little dignity
+    bool win;//Starts false, made true by catching the polluter
   public:
-    activist(const string n, const char space = 'A'):
+    activist(const string n, const char space = DEF_ACTIVIST,
+      const short wall = 0, const short cop = 0):
       toxicity(.05), dignity(100), name(n), row_loc(-1), col_loc(-1),
-      arr_Char(space), state(STATES[0]), last_Char(SPACE) {}
+      arr_Char(space), state(STATES[0]), last_Char(SPACE), wall_Loss(wall),
+      cop_Loss(cop), lose(false), win(false) {}
 
     //Desc: This places the activist in the center of town
     //Pre: None

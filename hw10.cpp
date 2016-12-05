@@ -13,7 +13,6 @@ int main()
   short num_days;
   short points_wall;
   short points_cop;
-  town Springfield;
   ifstream fin;
   fin.open(CONFIG_FILE.c_str());
 
@@ -24,5 +23,15 @@ int main()
   {
     cout << "Nah, son" << endl;
   }
+
+  fin >> grid_size;
+  fin >> num_roots;
+  fin >> num_cops;
+  fin >> num_days;
+  fin >> points_wall;
+  fin >> points_cop;
+
+  town Springfield(grid_size, num_roots, num_cops);
+  activist Lisa("Lisa", 'L', points_wall, points_cop);
   return 0;
 }

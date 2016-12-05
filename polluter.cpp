@@ -1,4 +1,4 @@
-//Programmer: ANDREW BRAY          ID: 12518487
+//Programmer: ANDREW BRAY, JOSHUA WARNER          ID: 12518487, 12522483
 //Class: CS1570                    Section: A
 //Date: 11/18/16                   File: polluter.cpp
 //Description: Function file for the polluter class

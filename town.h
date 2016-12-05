@@ -1,4 +1,4 @@
-//Programmer: ANDREW BRAY          ID: 12518487
+//Programmer: ANDREW BRAY, JOSHUA WARNER          ID: 12518487, 12522483
 //Class: CS1570                    Section: A
 //Date: 11/18/16                   File: town.h
 //Description: Header file for the town class
@@ -18,6 +18,7 @@ const char WALL = 'W';
 const char EXIT = 'E';
 const char SPACE = ' ';
 const char COP = 'C';
+const char ROOT = 'R';
 const char DEF_POLLUTER = 'P';//The default polluter character
 
 class town
@@ -31,8 +32,9 @@ class town
     short numRoots;//Number of roots in the town
     short numCops;//Number of cops in the town
   public:
-    town(const short townSize = MAX_SIZE)
-      : numRoots(-1), numCops(-1) {setSize(townSize); clear(); build();}
+    town(const short townSize = MAX_SIZE, const short roots = 0,
+      const short cops = 0)
+      : numRoots(roots), numCops(cops) {setSize(townSize); clear(); build();}
     //Desc: This function returns the size of the town
     //Pre: none
     //Post: The size has been returned

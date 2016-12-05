@@ -1,4 +1,4 @@
-//Programmer: ANDREW BRAY          ID: 12518487
+//Programmer: ANDREW BRAY, JOSHUA WARNER          ID: 12518487, 12522483
 //Class: CS1570                    Section: A
 //Date: 11/18/16                   File: town.cpp
 //Description: Function file for the town class
@@ -8,9 +8,11 @@
 
 void town:: build()
 {
-  ifstream fin("config.dat");
-  numRoots = 2;
-  numCops = 2;
+  short rootCount = 0;//These two are used to stop the array from placing too
+  short copCount = 0; //many cops or roots
+  short randRow;//These two are used to find a random tile to put the cops and
+  short randCol;//roots into.
+
   short halfSize = size / 2;//Used to place exits
   for(int r = 0; r < size; r++)
   {
@@ -22,7 +24,28 @@ void town:: build()
      else if(r==0 || r==size-1 || c==0 || c==size-1)//Adds walls
         townMap[r][c] = WALL;
       else
-        townMap[r][c] = ' ';//Fils rest of town with blank space
+        townMap[r][c] = SPACE;//Fils rest of town with blank space
+    }
+  }
+
+
+  //This loop will place the cop and root symbols in the array
+  while(rootCount < num_roots && copCount < num_cops)
+  {
+    randRow = myRand(size-1, 1);//myRand is called for size-1 and 1 to prevent
+    randCol = myRand(size-1, 1);//choosing a square with an exit or wall
+    if(getSquare(randRow, randCol) == SPACE)
+    {
+      if(copCount < num_cops)
+      {
+        copCount++;
+        townMap[randRow][randCol] = COP;
+      }
+      else
+      {
+        rootCount++;
+        townMap[randRow][randCol] = ROOT;
+      }
     }
   }
   return;
@@ -32,7 +55,7 @@ void town:: clear()
 {
   for(int r = 0; r < MAX_SIZE; r++)
     for(int c = 0; c < MAX_SIZE; c++)
-      townMap[r][c] = ' ';
+      townMap[r][c] = SPACE;
   return;
 }
 
