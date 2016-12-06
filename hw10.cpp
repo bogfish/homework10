@@ -13,6 +13,7 @@ int main()
   short num_days;
   short points_wall;
   short points_cop;
+  short current_day = 1;
   ifstream fin;
   fin.open(CONFIG_FILE.c_str());
 
@@ -33,5 +34,19 @@ int main()
 
   town Springfield(grid_size, num_roots, num_cops);
   activist Lisa("Lisa", 'L', points_wall, points_cop);
+
+  for (short i = 0; i < num_days; i++)
+  {
+    Springfield.clear();
+    Springfield.build();
+
+    if (i < 2)
+    {
+      cout << "Day " << i << ": " << endl;
+      cout << Springfield << endl;
+    }
+
+  }
+
   return 0;
 }
