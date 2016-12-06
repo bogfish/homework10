@@ -7,11 +7,20 @@
 #define HW10_H
 
 #include "root.h"
+#include <unistd.h>//Used to print the town in a readable way
 
 using namespace std;
 
 const short NUM_DAYS = 1;
 const short NUM_SIM = 10;
 const string CONFIG_FILE = "config.dat";
+const long SLEEP = 450000;//Used to make the compiler wait .45 seconds before
+                          //printing
+
+//Desc: This function will simulate a single day in the town, with print
+//      determining whether the town prints during this process
+//Pre: None
+//Post: A day will be run in the town. It will be printed if print is true
+void simulate(const bool print);
 
 #endif

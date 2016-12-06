@@ -12,6 +12,8 @@ The prompt for this homework can be found [here](https://sites.google.com/a/mst.
 
 ## To-Do
 
-1. Add a file or function to simulate a day
+1. Overload + or += for roots/activist
 2. Add root functionality to the activist class
-3. That might actually be it, aside from bug hunting
+3. Test the simulate function
+4. Hw10.cpp and the simulate function both use a ifstream to read config file.
+   but hw10.cpp only needs it for the number of days. Find a way to fix this.

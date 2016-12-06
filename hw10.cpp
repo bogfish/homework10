@@ -13,17 +13,8 @@ int main()
   short num_days;
   short points_wall;
   short points_cop;
-  short current_day = 1;
   ifstream fin;
   fin.open(CONFIG_FILE.c_str());
-
-  if (fin.is_open())
-  {
-    cout << "File was opened!" << endl;
-  } else
-  {
-    cout << "Nah, son" << endl;
-  }
 
   fin >> grid_size;
   fin >> num_roots;
@@ -32,19 +23,16 @@ int main()
   fin >> points_wall;
   fin >> points_cop;
 
-  town Springfield(grid_size, num_roots, num_cops);
-  activist Lisa("Lisa", 'L', points_wall, points_cop);
-
   for (short i = 0; i < num_days; i++)
   {
-    Springfield.clear();
-    Springfield.build();
 
     if (i < 2)
     {
-      cout << "Day " << i << ": " << endl;
-      cout << Springfield << endl;
+      cout << "Day " << i +1 << ": " << endl;
+      simulate(true);
     }
+    else
+      simulate(false);
 
   }
 

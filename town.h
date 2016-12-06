@@ -29,9 +29,9 @@ class town
     void setSize(const short s);
     short numRoots;//Number of roots in the town
     short numCops;//Number of cops in the town
-  public:
     void build();
     void clear();
+  public:
     town(const short townSize = MAX_SIZE, const short roots = 0,
       const short cops = 0)
       : numRoots(roots), numCops(cops) {setSize(townSize); clear(); build();}
