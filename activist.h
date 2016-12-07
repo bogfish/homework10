@@ -13,7 +13,7 @@ const float MAX_TOX = 3;//Maximum and minimum toxicity
 const float MIN_TOX = 0;
 const short MAX_DIG = 100;//Maximum and minimum toxicity
 const short MIN_DIG = 0;
-const float START_TOX = .05;
+const float START_TOX = .05;  // Starting toxicity and dignity
 const short START_DIG = 100;
 const string STATES[] = {"normal", "cool", "gone"};
 const float FIRST_TOX_UP = .08;//These two will change the state according to
@@ -22,13 +22,13 @@ const float SECOND_TOX_UP = .25;//the STATES array
 class activist
 {
   private:
-    float toxicity;
-    short dignity;
-    string name;
+    float toxicity; // Toxicity
+    short dignity;  // Dignity
+    string name;  // Name of activist
     short row_loc;//Row and column location
     short col_loc;
-    char arr_Char;
-    string state;
+    char arr_Char;  // Char representation
+    string state; // State of activist
     char last_Char;//The character that was in the array before the activist
     short wall_Loss;//Dignity lost for running into a wall
     short cop_Loss;//Dignity lost for running into a cop
@@ -42,10 +42,21 @@ class activist
       toxicity(.05), dignity(100), name(n), row_loc(-1), col_loc(-1),
       arr_Char(space), state(STATES[0]), last_Char(SPACE), wall_Loss(wall),
       cop_Loss(cop), lose(false), win(false), exited(false) {}
+
+    // Desc: Get bool value for win
+    // Pre: None
+    // Post:  Return bool value
     bool getWin()const;
+
+    // Desc: Get bool value for lose
+    // Pre: None
+    // Post:  Return bool value
     bool getLose()const;
+
+    // Desc: Get state of activist
+    // Pre: None
+    // Post:  Return state string
     string getState()const;
-    // void setToxicity();
 
     //Desc: This places the activist in the center of town
     //Pre: None
@@ -62,8 +73,14 @@ class activist
     //Post: The activist has been moved towards the polluter
     void searchMove(town & t, const polluter & p);
 
+    // Desc: Get the toxicity of activist
+    // Pre: None
+    // Post:  Return float value for toxicity
     float getTox()const;
 
+    // Desc:  Get Dignity of activist
+    // Pre: None
+    // Post:  Return dignity
     short getDignity()const;
 
     //Desc: This overloads << to display characteristics of the activist
@@ -71,13 +88,11 @@ class activist
     //Post: Returns out and displays characterisitcs of the activist
     friend ostream& operator<<(ostream & out, const activist & A);
 
+    // Desc: Overloaded += for adding root effect
+    // Pre: Root must be declared (obviously)
+    // Post: Return activist
     activist operator+=(const root& R);
 
 };
-
-//Desc: Generates a random number between max and min
-//Pre: none
-//Post: Returns a random number between max and min
-
 
 #endif

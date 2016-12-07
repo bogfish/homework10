@@ -14,9 +14,12 @@ void polluter:: random_move(town & t)
   short r = row_loc;//Because I'm too lazy to type row_loc and col_loc
   short c = col_loc;
 
+    // check if caught
     if(!is_Caught)
     {
+      // Generate move
       ran = myRand(4,1);
+      // Check if move is up
       if(ran == 1)
       {
         if(!t.isWall(r-1,c) && !t.isExit(r-1, c))
@@ -33,6 +36,7 @@ void polluter:: random_move(town & t)
 
         }
       }
+      // Check if move is right
       else if(ran == 2)
       {
         if(!t.isWall(r,c+1) && !t.isExit(r,c+1))
@@ -48,6 +52,7 @@ void polluter:: random_move(town & t)
           }
         }
       }
+      // Check if move is down
       else if(ran == 3)
       {
         if(!t.isWall(r+1,c) && !t.isExit(r+1, c))
@@ -63,6 +68,7 @@ void polluter:: random_move(town & t)
           }
         }
       }
+      // Check if move is left
       else if(ran == 4)
       {
         if(!t.isWall(r,c-1) && !t.isExit(r,c-1))
@@ -90,6 +96,7 @@ void polluter:: place_me(town & t)
   short randCol;
   short randRow;
 
+  // loop to ensure he is placed on a space
   while(!placed)
   {
     randCol = myRand(t.getSize()-1, 0);

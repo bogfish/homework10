@@ -13,16 +13,19 @@ class polluter
 {
   private:
     string name;
-    short row_loc;
-    short col_loc;
-    char arr_Char;
-    bool is_Caught;
-    char last_Char;
+    short row_loc;  // row location of polluter
+    short col_loc;  // col location of polluter
+    char arr_Char;  // Character to represent polluter
+    bool is_Caught; // bool for being caught
+    char last_Char; // Last char for movement
   public:
     polluter(const string n, const char c = DEF_POLLUTER):
       name(n), row_loc(-1), col_loc(-1), arr_Char(c),
       is_Caught(false), last_Char(SPACE) {}
 
+    // Desc: Get character
+    // Pre: None
+    // Post: Return character of polluter
     char getChar()const;
 
 

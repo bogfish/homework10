@@ -10,12 +10,12 @@
 
 using namespace std;
 
-const float NEG_MIN = -0.001;
-const float NEG_MAX = -0.010;
-const float POS_MIN = 0.05;
-const float POS_MAX = 0.10;
-const string TRUFFLE = "Truffle";
-const string SQUARE = "Square";
+const float NEG_MIN = -0.001; // Negative effect minimum
+const float NEG_MAX = -0.010; // Negative effect maximum
+const float POS_MIN = 0.05; // Positive effect minimum
+const float POS_MAX = 0.10; // Positive effect maximum
+const string TRUFFLE = "Truffle"; // String for Truffle
+const string SQUARE = "Square";   // String for Square
 
 class root
 {
@@ -24,6 +24,10 @@ class root
     float effect;
   public:
     root();
+
+    // Desc: Get effect of root
+    // Pre: none
+    // Post: Return float value for effect
     float getEffect()const;
 };
 

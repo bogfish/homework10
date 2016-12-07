@@ -14,12 +14,12 @@
 
 using namespace std;
 
-const short MAX_SIZE = 25;
-const char WALL = 'W';
-const char EXIT = 'E';
-const char SPACE = ' ';
-const char COP = 'C';
-const char ROOT = 'R';
+const short MAX_SIZE = 25;    // Max size of town
+const char WALL = 'W';    // Wall char
+const char EXIT = 'E';    // Exit char
+const char SPACE = ' ';   // Space char
+const char COP = 'C';   // Cop char
+const char ROOT = 'R';    // Root char
 const char DEF_POLLUTER = 'P';//The default polluter character
 
 class town
@@ -30,12 +30,21 @@ class town
     void setSize(const short s);
     short numRoots;//Number of roots in the town
     short numCops;//Number of cops in the town
+
+    // Desc: Build town
+    // Pre: None
+    // Post: None
     void build();
+
+    // Desc: Clear town
+    // Pre: None
+    // Post: None
     void clear();
   public:
     town(const short townSize = MAX_SIZE, const short roots = 0,
       const short cops = 0)
       : numRoots(roots), numCops(cops) {setSize(townSize); clear(); build();}
+
     //Desc: This function returns the size of the town
     //Pre: none
     //Post: The size has been returned
@@ -81,8 +90,14 @@ class town
     void setSquare(const short row, const short col, const char val);
 };
 
+// Desc: Rand function for shorts
+// Pre: Must be passed max and min
+// Post: Return random value
 short myRand(const short max, const short min);
 
+// Desc: Rand function for floats
+// Pre: Must be passed max and min
+// Post: Return random value
 float myFRand(const float max, const float min);
 
 #endif
