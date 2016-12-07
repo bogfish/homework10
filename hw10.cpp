@@ -26,15 +26,16 @@ int main()
   for (short i = 0; i < num_days; i++)
   {
 
-    if (i < 2)
+    if (i < 1)
     {
-      cout << "Day " << i +1 << ": " << endl;
+      cout << "Day " << i + 1 << ": " << endl;
       simulate(true);
     }
     else
       simulate(false);
-
   }
+
+  fin.close();
 
   return 0;
 }

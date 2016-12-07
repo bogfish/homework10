@@ -23,6 +23,8 @@ class polluter
       name(n), row_loc(-1), col_loc(-1), arr_Char(DEF_POLLUTER),
       is_Caught(false), last_Char(SPACE) {}
 
+    char getChar()const;
+
     //Desc:Moves the polluter to an empty adjacent tile in a random direction
     //Pre: None
     //Post: The polluter has been moved one tile

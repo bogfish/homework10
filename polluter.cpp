@@ -39,7 +39,7 @@ void polluter:: random_move(town & t)
           is_Caught = true;
         t.setSquare(r, c, last_Char);
         last_Char = t.getSquare(r,c+1);
-        col_loc--;
+        col_loc++;
         t.setSquare(r, col_loc, arr_Char);
       }
     }
@@ -87,9 +87,15 @@ void polluter:: place_me(town & t)
       t.setSquare(randRow, randCol, arr_Char);
       row_loc = randRow;
       col_loc = randCol;
+      placed = true;
     }
   }
   return;
+}
+
+char polluter:: getChar()const
+{
+  return arr_Char;
 }
 
 short polluter:: getRow()const

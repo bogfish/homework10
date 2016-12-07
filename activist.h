@@ -41,6 +41,9 @@ class activist
       toxicity(.05), dignity(100), name(n), row_loc(-1), col_loc(-1),
       arr_Char(space), state(STATES[0]), last_Char(SPACE), wall_Loss(wall),
       cop_Loss(cop), lose(false), win(false) {}
+    bool getWin()const;
+    bool getLose()const;
+    string getState()const;
 
     //Desc: This places the activist in the center of town
     //Pre: None
@@ -61,6 +64,8 @@ class activist
     //Pre: None
     //Post: Returns out and displays characterisitcs of the activist
     friend ostream& operator<<(ostream & out, const activist & A);
+
+
 };
 
 //Desc: Generates a random number between max and min

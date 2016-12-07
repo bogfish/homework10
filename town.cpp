@@ -30,13 +30,13 @@ void town:: build()
 
 
   //This loop will place the cop and root symbols in the array
-  while(rootCount < num_roots && copCount < num_cops)
+  while(rootCount < numRoots && copCount < numCops)
   {
     randRow = myRand(size-1, 1);//myRand is called for size-1 and 1 to prevent
     randCol = myRand(size-1, 1);//choosing a square with an exit or wall
     if(getSquare(randRow, randCol) == SPACE)
     {
-      if(copCount < num_cops)
+      if(copCount < numCops)
       {
         copCount++;
         townMap[randRow][randCol] = COP;
@@ -98,6 +98,11 @@ bool town:: isExit(const short row, const short col)const
 bool town:: isCop(const short row, const short col)const
 {
   return townMap[row][col]==COP ? true : false;
+}
+
+bool town:: isRoot(const short row, const short col)const
+{
+  return townMap[row][col]==ROOT ? true : false;
 }
 
 char town:: getSquare(const short row, const short col)const

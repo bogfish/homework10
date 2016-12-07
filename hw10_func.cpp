@@ -13,12 +13,9 @@ void simulate(const bool print)
   fin.open(CONFIG_FILE.c_str());
 
   if (fin.is_open())
-  {
     cout << "File was opened!" << endl;
-  } else
-  {
+  else
     cout << "Nah, son" << endl;
-  }
 
   fin >> grid_size;
   fin >> num_roots;
@@ -28,14 +25,20 @@ void simulate(const bool print)
   fin >> points_cop;
 
   town Springfield(grid_size, num_roots, num_cops);
+  cout << Springfield << endl;
   activist Lisa("Lisa", 'L', points_wall, points_cop);
+  cout << "Activist created" << endl;
   polluter Homer("Homer");
+  cout << "Polluter created" << endl;
 
   Homer.place_me(Springfield);
+  cout << "Homer Placed" << endl;
   Lisa.placeMeInMiddle(Springfield);
+  cout << "Lisa Placed" << endl;
 
-  while(!Lisa.win && !Lisa.lose)
+  while(!Lisa.getWin() && !Lisa.getLose())
   {
+    cout << "Homer's move" << endl;
     Homer.random_move(Springfield);
     if(print)
     {
@@ -43,8 +46,10 @@ void simulate(const bool print)
       usleep(SLEEP);//Makes the compiler wait .45 seconds before printing
                      //for readability purposes
     }
-    if(Lisa.state = STATES[0])
+    // compares the states, returns 0 if equal, hence the !
+    if(!STATES[0].compare(Lisa.getState()))
     {
+      cout << "Lisa is searching" << endl;
       Lisa.searchMove(Springfield, Homer);
       if(print)
       {
@@ -54,6 +59,7 @@ void simulate(const bool print)
     }
     else
     {
+      cout << "Lisa is randmoving" << endl;
       Lisa.randMove(Springfield);
       if(print)
       {
