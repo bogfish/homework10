@@ -16,6 +16,8 @@ int main()
   ifstream fin;
   fin.open(CONFIG_FILE.c_str());
 
+  srand(time(NULL));
+
   fin >> grid_size;
   fin >> num_roots;
   fin >> num_cops;
@@ -26,7 +28,7 @@ int main()
   for (short i = 0; i < num_days; i++)
   {
 
-    if (i < 1)
+    if (i < 2)
     {
       cout << "Day " << i + 1 << ": " << endl;
       simulate(true);

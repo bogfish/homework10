@@ -6,7 +6,7 @@
 #ifndef HW10_H
 #define HW10_H
 
-#include "root.h"
+#include "activist.h"
 #include <unistd.h>//Used to print the town in a readable way
 
 using namespace std;

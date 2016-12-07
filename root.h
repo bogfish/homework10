@@ -6,7 +6,7 @@
 #ifndef ROOT_H
 #define ROOT_H
 
-#include "activist.h"
+#include "polluter.h"
 
 using namespace std;
 
@@ -17,13 +17,14 @@ const float POS_MAX = 0.10;
 const string TRUFFLE = "Truffle";
 const string SQUARE = "Square";
 
-class Root
+class root
 {
   private:
     string desc;
     float effect;
   public:
-    Root();
+    root();
+    float getEffect()const;
 };
 
 #endif

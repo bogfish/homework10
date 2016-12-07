@@ -8,14 +8,10 @@ void simulate(const bool print)
   short num_days;
   short points_wall;
   short points_cop;
-  short current_day = 1;
+
+  // short current_day = 1;
   ifstream fin;
   fin.open(CONFIG_FILE.c_str());
-
-  if (fin.is_open())
-    cout << "File was opened!" << endl;
-  else
-    cout << "Nah, son" << endl;
 
   fin >> grid_size;
   fin >> num_roots;
@@ -25,20 +21,14 @@ void simulate(const bool print)
   fin >> points_cop;
 
   town Springfield(grid_size, num_roots, num_cops);
-  cout << Springfield << endl;
   activist Lisa("Lisa", 'L', points_wall, points_cop);
-  cout << "Activist created" << endl;
   polluter Homer("Homer");
-  cout << "Polluter created" << endl;
 
   Homer.place_me(Springfield);
-  cout << "Homer Placed" << endl;
   Lisa.placeMeInMiddle(Springfield);
-  cout << "Lisa Placed" << endl;
 
-  while(!Lisa.getWin() && !Lisa.getLose())
+  while(!Lisa.getWin() && !Lisa.getLose() && !Homer.getWin())
   {
-    cout << "Homer's move" << endl;
     Homer.random_move(Springfield);
     if(print)
     {
@@ -49,7 +39,6 @@ void simulate(const bool print)
     // compares the states, returns 0 if equal, hence the !
     if(!STATES[0].compare(Lisa.getState()))
     {
-      cout << "Lisa is searching" << endl;
       Lisa.searchMove(Springfield, Homer);
       if(print)
       {
@@ -57,16 +46,24 @@ void simulate(const bool print)
         usleep(SLEEP);
       }
     }
-    else
+    else if (!STATES[1].compare(Lisa.getState()))
     {
-      cout << "Lisa is randmoving" << endl;
       Lisa.randMove(Springfield);
       if(print)
       {
         cout<<Springfield;
         usleep(SLEEP);
       }
+    } else if (!STATES[2].compare(Lisa.getState()))
+    {
+      break;
     }
+  }
+
+  if (print)
+  {
+    cout << Lisa;
+    sleep(2);
   }
 
   return;

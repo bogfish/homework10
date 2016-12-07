@@ -23,12 +23,14 @@ void activist:: randMove(town & t)
   short r = row_loc;//Because I'm too lazy to type row_loc and col_loc
   short c = col_loc;
   ran = myRand(4,1);
-
   if(ran == 1)
   {
     if(t.isWall(r-1,c))
     {
-      dignity -= wall_Loss;
+      if ((dignity -= wall_Loss) < MIN_DIG)
+        dignity = MIN_DIG;
+      else
+        dignity -= wall_Loss;
     }
     else if(t.isExit(r-1,c))
     {
@@ -39,17 +41,23 @@ void activist:: randMove(town & t)
     {
       if(t.isCop(r-1,c))
       {
-        dignity -= cop_Loss;
-        t.setSquare(r, c, last_Char);
-        last_Char = COP;
+        if ((dignity - cop_Loss) < MIN_DIG)
+          dignity = MIN_DIG;
+        else
+          dignity -= cop_Loss;
+
       }
       else if(t.isRoot(r-1,c))
       {
-        //DO ROOT STUFF
-        //last_Char will NOT be the root character, as the root will be gone
+        root Root;
+          *this += Root;
       }
+      t.setSquare(row_loc, col_loc, last_Char);
       row_loc--;
-      last_Char = t.getSquare(row_loc, col_loc);
+      if (!t.isRoot(row_loc, col_loc))
+        last_Char = t.getSquare(row_loc, col_loc);
+      else
+        last_Char = SPACE;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
   }
@@ -57,7 +65,10 @@ void activist:: randMove(town & t)
   {
     if(t.isWall(r,c+1))
     {
-      dignity -= wall_Loss;
+      if ((dignity -= wall_Loss) < MIN_DIG)
+        dignity = MIN_DIG;
+      else
+        dignity -= wall_Loss;
     }
     else if(t.isExit(r,c+1))
     {
@@ -68,17 +79,22 @@ void activist:: randMove(town & t)
     {
       if(t.isCop(r,c+1))
       {
-        dignity -= cop_Loss;
-        t.setSquare(r, c, last_Char);
-        last_Char = COP;
+        if ((dignity - cop_Loss) < MIN_DIG)
+          dignity = MIN_DIG;
+        else
+          dignity -= cop_Loss;
       }
       else if(t.isRoot(r,c+1))
       {
-        //DO ROOT STUFF
-        //last_Char will NOT be the root character, as the root will be gone
+        root Root;
+         *this += Root;
       }
+      t.setSquare(row_loc, col_loc, last_Char);
       col_loc++;
-      last_Char = t.getSquare(row_loc, col_loc);
+      if (!t.isRoot(row_loc, col_loc))
+        last_Char = t.getSquare(row_loc, col_loc);
+      else
+        last_Char = SPACE;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
   }
@@ -86,7 +102,10 @@ void activist:: randMove(town & t)
   {
     if(t.isWall(r+1,c))
     {
-      dignity -= wall_Loss;
+      if ((dignity -= wall_Loss) < MIN_DIG)
+        dignity = MIN_DIG;
+      else
+        dignity -= wall_Loss;
     }
     else if(t.isExit(r+1,c))
     {
@@ -97,17 +116,22 @@ void activist:: randMove(town & t)
     {
       if(t.isCop(r+1,c))
       {
-        dignity -= cop_Loss;
-        t.setSquare(r, c, last_Char);
-        last_Char = COP;
+        if ((dignity - cop_Loss) < MIN_DIG)
+          dignity = MIN_DIG;
+        else
+          dignity -= cop_Loss;
       }
       else if(t.isRoot(r+1,c))
       {
-        //DO ROOT STUFF
-        //last_Char will NOT be the root character, as the root will be gone
+        root Root;
+         *this += Root;
       }
+      t.setSquare(row_loc, col_loc, last_Char);
       row_loc++;
-      last_Char = t.getSquare(row_loc, col_loc);
+      if (!t.isRoot(row_loc, col_loc))
+        last_Char = t.getSquare(row_loc, col_loc);
+      else
+        last_Char = SPACE;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
   }
@@ -115,7 +139,10 @@ void activist:: randMove(town & t)
   {
     if(t.isWall(r,c-1))
     {
-      dignity -= wall_Loss;
+      if ((dignity -= wall_Loss) < MIN_DIG)
+        dignity = MIN_DIG;
+      else
+        dignity -= wall_Loss;
     }
     else if(t.isExit(r,c-1))
     {
@@ -126,20 +153,35 @@ void activist:: randMove(town & t)
     {
       if(t.isCop(r,c-1))
       {
-        dignity -= cop_Loss;
-        t.setSquare(r, c, last_Char);
-        last_Char = COP;
+        if ((dignity - cop_Loss) < MIN_DIG)
+          dignity = MIN_DIG;
+        else
+          dignity -= cop_Loss;
       }
       else if(t.isRoot(r,c-1))
       {
-        //DO ROOT STUFF
-        //last_Char will NOT be the root character, as the root will be gone
+        root Root;
+         *this += Root;
       }
+      t.setSquare(row_loc, col_loc, last_Char);
       col_loc--;
-      last_Char = t.getSquare(row_loc, col_loc);
+      if (!t.isRoot(row_loc, col_loc))
+        last_Char = t.getSquare(row_loc, col_loc);
+      else
+        last_Char = SPACE;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
   }
+  if (toxicity >= SECOND_TOX_UP)
+  {
+    lose = true;
+    state = STATES[2];
+  } else if (toxicity < FIRST_TOX_UP)
+  {
+    state = STATES[0];
+  }
+  if (dignity <= 0)
+    lose = true;
   return;
 }
 
@@ -158,6 +200,11 @@ string activist:: getState()const
   return state;
 }
 
+// void activist:: setToxicity()
+// {
+//
+// }
+
 void activist:: searchMove(town & t, const polluter & p)
 {
   short r = row_loc;//These variables exist because I, Andrew, am too lazy to
@@ -169,7 +216,10 @@ void activist:: searchMove(town & t, const polluter & p)
   {
     if(t.isWall(r+1,c))
     {
-      dignity -= wall_Loss;
+      if ((dignity -= wall_Loss) < MIN_DIG)
+        dignity = MIN_DIG;
+      else
+        dignity -= wall_Loss;
     }
     else if(t.isExit(r+1,c))
     {
@@ -184,19 +234,23 @@ void activist:: searchMove(town & t, const polluter & p)
       }
       else if(t.isCop(r+1,c))
       {
-        dignity -= cop_Loss;
-        t.setSquare(r, c, last_Char);
-        last_Char = COP;
+        if ((dignity - cop_Loss) < MIN_DIG)
+          dignity = MIN_DIG;
+        else
+          dignity -= cop_Loss;
       }
       else if(t.isRoot(r+1,c))
       {
-        //DO ROOT STUFF
-        //last_Char will NOT be the root character, as the root will be gone
+        root Root;
+         *this += Root;
       }
       t.setSquare(row_loc, col_loc, last_Char);
 
       row_loc++;
-      last_Char = t.getSquare(row_loc, col_loc);
+      if (!t.isRoot(row_loc, col_loc))
+        last_Char = t.getSquare(row_loc, col_loc);
+      else
+        last_Char = SPACE;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
   }
@@ -205,7 +259,10 @@ void activist:: searchMove(town & t, const polluter & p)
   {
     if(t.isWall(r-1,c))
     {
-      dignity -= wall_Loss;
+      if ((dignity -= wall_Loss) < MIN_DIG)
+        dignity = MIN_DIG;
+      else
+        dignity -= wall_Loss;
     }
     else if(t.isExit(r-1,c))
     {
@@ -220,18 +277,22 @@ void activist:: searchMove(town & t, const polluter & p)
       }
       else if(t.isCop(r-1,c))
       {
-        dignity -= cop_Loss;
-        t.setSquare(r, c, last_Char);
-        last_Char = COP;
+        if ((dignity - cop_Loss) < MIN_DIG)
+          dignity = MIN_DIG;
+        else
+          dignity -= cop_Loss;
       }
       else if(t.isRoot(r-1,c))
       {
-        //DO ROOT STUFF
-        //last_Char will NOT be the root character, as the root will be gone
+        root Root;
+         *this += Root;
       }
       t.setSquare(row_loc, col_loc, last_Char);
       row_loc--;
-      last_Char = t.getSquare(row_loc, col_loc);
+      if (!t.isRoot(row_loc, col_loc))
+        last_Char = t.getSquare(row_loc, col_loc);
+      else
+        last_Char = SPACE;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
   }
@@ -240,7 +301,10 @@ void activist:: searchMove(town & t, const polluter & p)
   {
     if(t.isWall(r,c+1))
     {
-      dignity -= wall_Loss;
+      if ((dignity -= wall_Loss) < MIN_DIG)
+        dignity = MIN_DIG;
+      else
+        dignity -= wall_Loss;
     }
     else if(t.isExit(r,c+1))
     {
@@ -255,18 +319,22 @@ void activist:: searchMove(town & t, const polluter & p)
       }
       else if(t.isCop(r,c+1))
       {
-        dignity -= cop_Loss;
-        t.setSquare(r, c, last_Char);
-        last_Char = COP;
+        if ((dignity - cop_Loss) < MIN_DIG)
+          dignity = MIN_DIG;
+        else
+          dignity -= cop_Loss;
       }
       else if(t.isRoot(r,c+1))
       {
-        //DO ROOT STUFF
-        //last_Char will NOT be the root character, as the root will be gone
+        root Root;
+         *this += Root;
       }
       t.setSquare(row_loc, col_loc, last_Char);
       col_loc++;
-      last_Char = t.getSquare(row_loc, col_loc);
+      if (!t.isRoot(row_loc, col_loc))
+        last_Char = t.getSquare(row_loc, col_loc);
+      else
+        last_Char = SPACE;
       t.setSquare(row_loc, col_loc, arr_Char);
     }
   }
@@ -275,7 +343,10 @@ void activist:: searchMove(town & t, const polluter & p)
   {
     if(t.isWall(r,c-1))
     {
-      dignity -= wall_Loss;
+      if ((dignity -= wall_Loss) < MIN_DIG)
+        dignity = MIN_DIG;
+      else
+        dignity -= wall_Loss;
     }
     else if(t.isExit(r,c-1))
     {
@@ -290,19 +361,31 @@ void activist:: searchMove(town & t, const polluter & p)
       }
       else if(t.isCop(r,c-1))
       {
-        dignity -= cop_Loss;
-        t.setSquare(r, c, last_Char);
-        last_Char = COP;
+        if ((dignity - cop_Loss) < MIN_DIG)
+          dignity = MIN_DIG;
+        else
+          dignity -= cop_Loss;
       }
       else if(t.isRoot(r,c-1))
       {
-        //DO ROOT STUFF
-        //last_Char will NOT be the root character, as the root will be gone
+        root Root;
+         *this += Root;
       }
       t.setSquare(row_loc, col_loc, last_Char);
       col_loc--;
-      last_Char = ' ';
+      if (!t.isRoot(row_loc, col_loc))
+        last_Char = t.getSquare(row_loc, col_loc);
+      else
+        last_Char = SPACE;
       t.setSquare(row_loc, col_loc, arr_Char);
+    }
+    if (toxicity >= SECOND_TOX_UP)
+    {
+      lose = true;
+      state = STATES[2];
+    } else if (toxicity >= FIRST_TOX_UP)
+    {
+      state = STATES[1];
     }
   }
 
@@ -310,6 +393,10 @@ void activist:: searchMove(town & t, const polluter & p)
   //polluter occupy the same square. Thus, the activist has caught the polluter
   else
     win = true;
+
+  if (dignity <= 0)
+    lose = true;
+
   return;
 }
 
@@ -319,4 +406,16 @@ ostream& operator<<(ostream & out, const activist & A)
       <<"Toxicity: "<<A.toxicity<<endl<<"Row: "<<A.row_loc<<endl
       <<"Column: "<<A.col_loc<<endl;
   return out;
+}
+
+activist activist::operator+=(const root& R)
+{
+  if ((toxicity += R.getEffect()) > MAX_TOX)
+    toxicity = MAX_TOX;
+  else if ((toxicity += R.getEffect()) < MIN_TOX)
+    toxicity = MIN_TOX;
+  else
+    toxicity += R.getEffect();
+
+  return *this;
 }

@@ -10,6 +10,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <cstring>
+#include <ctime>
 
 using namespace std;
 
@@ -79,5 +80,7 @@ class town
 };
 
 short myRand(const short max, const short min);
+
+float myFRand(const float max, const float min);
 
 #endif

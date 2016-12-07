@@ -5,19 +5,24 @@
 
 #include "root.h"
 
-Root::Root()
+root::root()
 {
   bool isPositive = myRand(1, 0);
-  float randNum;
 
   if (isPositive)
   {
-    effect =  myRand(POS_MAX, POS_MIN);
+    effect = myFRand(POS_MAX, POS_MIN);
     desc = TRUFFLE;
   }
   else
   {
-    effect = myRand(NEG_MAX, NEG_MIN);
+    effect = myFRand(NEG_MAX, NEG_MIN);
     desc = SQUARE;
   }
+
+}
+
+float root:: getEffect()const
+{
+  return effect;
 }

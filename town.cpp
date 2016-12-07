@@ -30,7 +30,7 @@ void town:: build()
 
 
   //This loop will place the cop and root symbols in the array
-  while(rootCount < numRoots && copCount < numCops)
+  while(rootCount < numRoots || copCount < numCops)
   {
     randRow = myRand(size-1, 1);//myRand is called for size-1 and 1 to prevent
     randCol = myRand(size-1, 1);//choosing a square with an exit or wall
@@ -120,5 +120,12 @@ short myRand(const short max, const short min)
 {
   short retVal;
   retVal = rand() % (max - min +1) + min;
+  return retVal;
+}
+
+float myFRand(const float max, const float min)
+{
+  float retVal;
+  retVal = (max - min) * ((float) rand() / (float) RAND_MAX) + min;
   return retVal;
 }

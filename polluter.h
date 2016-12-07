@@ -18,12 +18,15 @@ class polluter
     char arr_Char;
     bool is_Caught;
     char last_Char;
+    bool win;
   public:
     polluter(const string n):
       name(n), row_loc(-1), col_loc(-1), arr_Char(DEF_POLLUTER),
       is_Caught(false), last_Char(SPACE) {}
 
     char getChar()const;
+
+    bool getWin()const;
 
     //Desc:Moves the polluter to an empty adjacent tile in a random direction
     //Pre: None

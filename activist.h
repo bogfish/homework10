@@ -6,7 +6,7 @@
 #ifndef ACTIVIST_H
 #define ACTIVIST_H
 
-#include "polluter.h"
+#include "root.h"
 
 const char DEF_ACTIVIST = 'A';//Default character for the activist
 const float MAX_TOX = 3;//Maximum and minimum toxicity
@@ -44,6 +44,7 @@ class activist
     bool getWin()const;
     bool getLose()const;
     string getState()const;
+    // void setToxicity();
 
     //Desc: This places the activist in the center of town
     //Pre: None
@@ -60,11 +61,13 @@ class activist
     //Post: The activist has been moved towards the polluter
     void searchMove(town & t, const polluter & p);
 
+
     //Desc: This overloads << to display characteristics of the activist
     //Pre: None
     //Post: Returns out and displays characterisitcs of the activist
     friend ostream& operator<<(ostream & out, const activist & A);
 
+    activist operator+=(const root& R);
 
 };
 

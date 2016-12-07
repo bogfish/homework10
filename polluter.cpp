@@ -13,58 +13,71 @@ void polluter:: random_move(town & t)
                          //  3
   short r = row_loc;//Because I'm too lazy to type row_loc and col_loc
   short c = col_loc;
-  bool done = false;//Checks to see if the activist was able to move
-  char currentSquare; //To be used to set the square in the town map. NOT USED
-  if(!is_Caught)
+  bool win = false;
+  if (!win)
   {
-    ran = myRand(4,1);
-    if(ran == 1)
+    if(!is_Caught)
     {
-      if(!t.isWall(r-1,c) && !t.isExit(r-1,c))
+      ran = myRand(4,1);
+      if(ran == 1)
       {
-        if(t.isCop(r-1,c))
-          is_Caught = true;
-        t.setSquare(r, c, last_Char);
-        last_Char = t.getSquare(r-1,c);
-        row_loc--;
-        t.setSquare(row_loc, col_loc, arr_Char);
+        if(!t.isWall(r-1,c))
+        {
+          if(t.isCop(r-1,c))
+            is_Caught = true;
+          t.setSquare(r, c, last_Char);
+          last_Char = t.getSquare(r-1,c);
+          row_loc--;
+          t.setSquare(row_loc, col_loc, arr_Char);
+        } else if (t.isExit(r-1,c))
+        {
+          win = true;
+        }
       }
-
-    }
-    else if(ran == 2)
-    {
-      if(!t.isWall(r,c+1) && !t.isExit(r,c+1))
+      else if(ran == 2)
       {
-        if(t.isCop(r,c+1))
-          is_Caught = true;
-        t.setSquare(r, c, last_Char);
-        last_Char = t.getSquare(r,c+1);
-        col_loc++;
-        t.setSquare(r, col_loc, arr_Char);
+        if(!t.isWall(r,c+1))
+        {
+          if(t.isCop(r,c+1))
+            is_Caught = true;
+          t.setSquare(r, c, last_Char);
+          last_Char = t.getSquare(r,c+1);
+          col_loc++;
+          t.setSquare(r, col_loc, arr_Char);
+        } else if (t.isExit(r,c+1))
+        {
+          win = true;
+        }
       }
-    }
-    else if(ran == 3)
-    {
-      if(!t.isWall(r+1,c) && !t.isExit(r+1,c))
+      else if(ran == 3)
       {
-        if(t.isCop(r+1,c))
-          is_Caught = true;
-        t.setSquare(r, c, last_Char);
-        last_Char = t.getSquare(r+1,c);
-        row_loc++;
-        t.setSquare(row_loc, col_loc, arr_Char);
+        if(!t.isWall(r+1,c))
+        {
+          if(t.isCop(r+1,c))
+            is_Caught = true;
+          t.setSquare(r, c, last_Char);
+          last_Char = t.getSquare(r+1,c);
+          row_loc++;
+          t.setSquare(row_loc, col_loc, arr_Char);
+        } else if (t.isExit(r+1,c))
+        {
+          win = true;
+        }
       }
-    }
-    else if(ran == 4)
-    {
-      if(!t.isWall(r,c-1) && !t.isExit(r,c-1))
+      else if(ran == 4)
       {
-        if(t.isCop(r,c-1))
-          is_Caught = true;
-        t.setSquare(r, c, last_Char);
-        last_Char = t.getSquare(r,c-1);
-        col_loc--;
-        t.setSquare(row_loc, col_loc, arr_Char);
+        if(!t.isWall(r,c-1) && !t.isExit(r,c-1))
+        {
+          if(t.isCop(r,c-1))
+            is_Caught = true;
+          t.setSquare(r, c, last_Char);
+          last_Char = t.getSquare(r,c-1);
+          col_loc--;
+          t.setSquare(row_loc, col_loc, arr_Char);
+        } else if (t.isExit(r,c-1))
+        {
+          win = true;
+        }
       }
     }
   }
@@ -96,6 +109,11 @@ void polluter:: place_me(town & t)
 char polluter:: getChar()const
 {
   return arr_Char;
+}
+
+bool polluter:: getWin()const
+{
+  return win;
 }
 
 short polluter:: getRow()const
