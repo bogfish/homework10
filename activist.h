@@ -35,12 +35,13 @@ class activist
     bool lose;//Starts false, made true by touching an exit, getting too much
               //toxicity, or by having too little dignity
     bool win;//Starts false, made true by catching the polluter
+    bool exited;//Starts false, made true by moving to an exit
   public:
     activist(const string n, const char space = DEF_ACTIVIST,
       const short wall = 0, const short cop = 0):
       toxicity(.05), dignity(100), name(n), row_loc(-1), col_loc(-1),
       arr_Char(space), state(STATES[0]), last_Char(SPACE), wall_Loss(wall),
-      cop_Loss(cop), lose(false), win(false) {}
+      cop_Loss(cop), lose(false), win(false), exited(false) {}
     bool getWin()const;
     bool getLose()const;
     string getState()const;
@@ -61,6 +62,9 @@ class activist
     //Post: The activist has been moved towards the polluter
     void searchMove(town & t, const polluter & p);
 
+    float getTox()const;
+
+    short getDignity()const;
 
     //Desc: This overloads << to display characteristics of the activist
     //Pre: None

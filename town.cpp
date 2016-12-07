@@ -105,6 +105,11 @@ bool town:: isRoot(const short row, const short col)const
   return townMap[row][col]==ROOT ? true : false;
 }
 
+bool town:: isSpace(const short row, const short col)const
+{
+  return townMap[row][col]==SPACE ? true : false;
+}
+
 char town:: getSquare(const short row, const short col)const
 {
   return townMap[row][col];

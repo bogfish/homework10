@@ -68,6 +68,8 @@ class town
     //Post: Returns whether or not the passed character is a "Root"
     bool isRoot(const short row, const short col)const;
 
+    bool isSpace(const short row, const short col)const;
+
     //Desc: The function returns the character value at the passed position
     //Pre: None
     //Post: THe character value at townMap[row][col] is returned

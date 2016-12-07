@@ -1,6 +1,7 @@
 #include "hw10.h"
 
-void simulate(const bool print)
+void simulate(const bool print, short & numWin, short & numExit,
+              short & numDigLose, short & numRootLose, float & sumTox)
 {
   short grid_size;
   short num_roots;
@@ -22,12 +23,12 @@ void simulate(const bool print)
 
   town Springfield(grid_size, num_roots, num_cops);
   activist Lisa("Lisa", 'L', points_wall, points_cop);
-  polluter Homer("Homer");
+  polluter Homer("Homer", 'H');
 
-  Homer.place_me(Springfield);
   Lisa.placeMeInMiddle(Springfield);
+  Homer.place_me(Springfield);
 
-  while(!Lisa.getWin() && !Lisa.getLose() && !Homer.getWin())
+  while(!Lisa.getWin() && !Lisa.getLose())
   {
     Homer.random_move(Springfield);
     if(print)
@@ -54,10 +55,7 @@ void simulate(const bool print)
         cout<<Springfield;
         usleep(SLEEP);
       }
-    } else if (!STATES[2].compare(Lisa.getState()))
-    {
-      break;
-    }
+    } 
   }
 
   if (print)
@@ -65,6 +63,19 @@ void simulate(const bool print)
     cout << Lisa;
     sleep(2);
   }
+  if(Lisa.getWin())
+    numWin++;
+  else
+  {
+    if(Lisa.getTox() >= SECOND_TOX_UP)
+      numRootLose++;
+    else if(Lisa.getDignity() <= MIN_DIG)
+      numDigLose++;
+    else
+      numExit++;
+  }
+  sumTox += Lisa.getTox();
 
+  fin.close();
   return;
 }

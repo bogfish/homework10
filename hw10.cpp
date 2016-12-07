@@ -16,6 +16,14 @@ int main()
   ifstream fin;
   fin.open(CONFIG_FILE.c_str());
 
+  short numWin = 0;
+  short numExit = 0;
+  short numDigLose = 0;
+  short numRootLose = 0;
+  float sumTox = 0;
+  float pcntWin;
+  float avgTox;
+
   srand(time(NULL));
 
   fin >> grid_size;
@@ -27,17 +35,27 @@ int main()
 
   for (short i = 0; i < num_days; i++)
   {
-
     if (i < 2)
     {
       cout << "Day " << i + 1 << ": " << endl;
-      simulate(true);
+      simulate(true, numWin, numExit, numDigLose, numRootLose, sumTox);
     }
     else
-      simulate(false);
+      simulate(false, numWin, numExit, numDigLose, numRootLose, sumTox);
   }
 
+  pcntWin = static_cast<float>(numWin) / static_cast<float>(num_days) *100;
+  avgTox = sumTox / num_days;
   fin.close();
+  cout<<"-----STATISTICS-----"<<endl;
+  cout<<"Percentage of wins: %"<<pcntWin<<endl;
+  cout<<"Number of times the activist exited: "<<numExit<<endl;
+  cout<<"Number of times the activist got stoned out of their mind: "
+      <<numRootLose<<endl;
+  cout<<"Number of times the activist died from dignity loss, and then "
+        "rose from the dead, like some kind of teenager Jesus: "
+      <<numDigLose<<endl;
+  cout<<"The activist's average toxicity: "<<avgTox<<endl;
 
   return 0;
 }

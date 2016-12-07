@@ -21,6 +21,7 @@ const long SLEEP = 450000;//Used to make the compiler wait .45 seconds before
 //      determining whether the town prints during this process
 //Pre: None
 //Post: A day will be run in the town. It will be printed if print is true
-void simulate(const bool print);
+void simulate(const bool print, short & numWin, short & numExit, 
+              short & numDigLose, short & numRootLose, float & sumTox);
 
 #endif

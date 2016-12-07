@@ -35,6 +35,7 @@ void activist:: randMove(town & t)
     else if(t.isExit(r-1,c))
     {
       lose = true;
+      exited = true;
       t.setSquare(row_loc, col_loc, last_Char);
     }
     else
@@ -73,6 +74,7 @@ void activist:: randMove(town & t)
     else if(t.isExit(r,c+1))
     {
       lose = true;
+      exited = true;
       t.setSquare(row_loc, col_loc, last_Char);
     }
     else
@@ -110,6 +112,7 @@ void activist:: randMove(town & t)
     else if(t.isExit(r+1,c))
     {
       lose = true;
+      exited = true;
       t.setSquare(row_loc, col_loc, last_Char);
     }
     else
@@ -147,6 +150,7 @@ void activist:: randMove(town & t)
     else if(t.isExit(r,c-1))
     {
       lose = true;
+      exited = true;
       t.setSquare(row_loc, col_loc, last_Char);
     }
     else
@@ -224,6 +228,7 @@ void activist:: searchMove(town & t, const polluter & p)
     else if(t.isExit(r+1,c))
     {
       lose = true;
+      exited = true;
       t.setSquare(row_loc, col_loc, last_Char);
     }
     else
@@ -267,6 +272,7 @@ void activist:: searchMove(town & t, const polluter & p)
     else if(t.isExit(r-1,c))
     {
       lose = true;
+      exited = true;
       t.setSquare(row_loc, col_loc, last_Char);
     }
     else
@@ -309,6 +315,7 @@ void activist:: searchMove(town & t, const polluter & p)
     else if(t.isExit(r,c+1))
     {
       lose = true;
+      exited = true;
       t.setSquare(row_loc, col_loc, last_Char);
     }
     else
@@ -351,6 +358,7 @@ void activist:: searchMove(town & t, const polluter & p)
     else if(t.isExit(r,c-1))
     {
       lose = true;
+      exited = true;
       t.setSquare(row_loc, col_loc, last_Char);
     }
     else
@@ -418,4 +426,14 @@ activist activist::operator+=(const root& R)
     toxicity += R.getEffect();
 
   return *this;
+}
+
+float activist:: getTox()const
+{
+  return toxicity;
+}
+
+short activist:: getDignity()const
+{
+  return dignity;
 }
